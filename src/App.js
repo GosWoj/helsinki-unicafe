@@ -4,13 +4,12 @@ const Button = ({ handleClick, text }) => {
   return <button onClick={handleClick}>{text}</button>;
 };
 
-const Statistics = ({ all, average, good }) => {
+const Statistics = ({ value, text, percentage = false }) => {
   return (
-    <div>
-      <p>All: {all}</p>
-      <p>Average: {average / all}</p>
-      <p>Positive: {(good / all) * 100} %</p>
-    </div>
+    <p>
+      {text}: {value}
+      {percentage ? "%" : null}
+    </p>
   );
 };
 
@@ -46,12 +45,14 @@ function App() {
       <Button handleClick={handleBad} text="Bad" />
       <h1>Statistics</h1>
       {all ? (
-        <>
-          <p>Good: {good}</p>
-          <p>Neutral: {neutral}</p>
-          <p>Bad: {bad}</p>
-          <Statistics all={all} average={average} good={good} />
-        </>
+        <div>
+          <Statistics text="Good" value={good} />
+          <Statistics text="Neutral" value={neutral} />
+          <Statistics text="Bad" value={bad} />
+          <Statistics text="All" value={all} />
+          <Statistics text="Average" value={average / all} />
+          <Statistics text="Positive" value={(good / all) * 100} percentage />
+        </div>
       ) : (
         <p>No feedback has yet been given</p>
       )}
