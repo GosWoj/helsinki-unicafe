@@ -8,17 +8,8 @@ const Statistics = ({ all, average, good }) => {
   return (
     <div>
       <p>All: {all}</p>
-      {all ? (
-        <>
-          <p>Average: {average / all}</p>
-          <p>Positive: {(good / all) * 100} %</p>
-        </>
-      ) : (
-        <>
-          <p>Average: 0</p>
-          <p>Positive: 0 %</p>
-        </>
-      )}
+      <p>Average: {average / all}</p>
+      <p>Positive: {(good / all) * 100} %</p>
     </div>
   );
 };
@@ -54,10 +45,16 @@ function App() {
       <Button handleClick={handleNeutral} text="Neutral" />
       <Button handleClick={handleBad} text="Bad" />
       <h1>Statistics</h1>
-      <p>Good: {good}</p>
-      <p>Neutral: {neutral}</p>
-      <p>Bad: {bad}</p>
-      <Statistics all={all} average={average} good={good} />
+      {all ? (
+        <>
+          <p>Good: {good}</p>
+          <p>Neutral: {neutral}</p>
+          <p>Bad: {bad}</p>
+          <Statistics all={all} average={average} good={good} />
+        </>
+      ) : (
+        <p>No feedback has yet been given</p>
+      )}
     </div>
   );
 }
