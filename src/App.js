@@ -4,6 +4,25 @@ const Button = ({ handleClick, text }) => {
   return <button onClick={handleClick}>{text}</button>;
 };
 
+const Statistics = ({ all, average, good }) => {
+  return (
+    <div>
+      <p>All: {all}</p>
+      {all ? (
+        <>
+          <p>Average: {average / all}</p>
+          <p>Positive: {(good / all) * 100} %</p>
+        </>
+      ) : (
+        <>
+          <p>Average: 0</p>
+          <p>Positive: 0 %</p>
+        </>
+      )}
+    </div>
+  );
+};
+
 function App() {
   const [good, setGood] = useState(0);
   const [neutral, setNeutral] = useState(0);
@@ -38,9 +57,7 @@ function App() {
       <p>Good: {good}</p>
       <p>Neutral: {neutral}</p>
       <p>Bad: {bad}</p>
-      <p>All: {all}</p>
-      <p>Average: {average / all}</p>
-      <p>Positive: {(good / all) * 100} %</p>
+      <Statistics all={all} average={average} good={good} />
     </div>
   );
 }
